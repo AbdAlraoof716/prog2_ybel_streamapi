@@ -19,13 +19,11 @@ public class Main {
 
         // Task II: Set of ECTS of all IFM students
         List<Student> students = List.of(
-            new Student("Yousef", 27, IFM),
-            new Student("Luca", 20, Enrollment.ELT),
-            new Student("Adrian", 25, IFM),
-            new Student("Louis",30,Enrollment.ARCH),
-            new Student("Abdelhadi",30,Enrollment.ELT),
-            new Student("Lirim",30, IFM)
-        );
+            new Student("A", 35, Enrollment.IFM),
+            new Student("B", 35, Enrollment.IFM),
+            new Student("C", 60, Enrollment.ELT),
+            new Student("D", 45, Enrollment.ARCH),
+            new Student("E", 80, Enrollment.IFM));
 
         Set<Integer> Cps = ifmCps(students);
         System.out.println("Die ECTS der IFM Studenten"+Cps);
