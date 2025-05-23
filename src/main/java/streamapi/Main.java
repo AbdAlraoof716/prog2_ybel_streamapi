@@ -1,6 +1,7 @@
 package streamapi;
 
-import java.io.InputStream;
+
+import java.io.*;
 import java.util.*;
 
 /** Starter for the stream api task. */
@@ -19,6 +20,7 @@ public class Main {
         // Task III: Random
 
         // Task IV+V: Resources
+        System.out.println(resources("file.txt"));
 
     }
 
@@ -70,8 +72,8 @@ public class Main {
      * @return An open {@link InputStream} for the resource file
      */
     private static InputStream getResourceAsStream(String path) {
-        // TODO
-        throw new UnsupportedOperationException();
+        InputStream input = Main.class.getResourceAsStream("/streamapi/file.txt");
+        return input;
     }
 
     /**
@@ -85,7 +87,17 @@ public class Main {
      * @return String of all matching lines, separated by {@code "\n"}
      */
     public static String resources(String path) {
-        // TODO
-        throw new UnsupportedOperationException();
+        try (InputStream stream = getResourceAsStream(path);
+             BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+
+            return reader.lines()
+                .filter(s -> s.startsWith("a") && s.length() >= 2)
+                .reduce((a, b) -> a + "\n" + b)
+                .orElse("");
+
+        } catch (IOException e) {
+            return "";
+        }
     }
+
 }
