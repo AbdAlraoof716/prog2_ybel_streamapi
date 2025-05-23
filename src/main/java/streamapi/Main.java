@@ -2,6 +2,8 @@ package streamapi;
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /** Starter for the stream api task. */
 public class Main {
@@ -17,6 +19,9 @@ public class Main {
         // Task II: Set of ECTS of all IFM students
 
         // Task III: Random
+        List<Integer> ergebnis = random();
+        System.out.println("Die Random zahlen: " + ergebnis);
+        System.out.println();
 
         // Task IV+V: Resources
 
@@ -55,9 +60,25 @@ public class Main {
      *
      * @return List of ten random integers (between 0 and 10)
      */
-    public static List<Integer> random() {
-        // TODO
-        throw new UnsupportedOperationException();
+    public static List<Integer> random(){
+        Random random = new Random();
+        List<Integer> num = List.of(0,1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        List<Integer> ran = Stream.generate(() ->num.get(random.nextInt(num.size())))
+            .limit(10)
+            .collect(Collectors.toList());
+
+        int summe2 =ran.stream()
+            .mapToInt(Integer::intValue)
+            .sum();
+        System.out.println("Summe der Random zahlen: " + summe2);
+
+        int summe =ran.stream()
+            .mapToInt(Integer::intValue)
+            .map(n -> n*2)
+            .sum();
+        System.out.println("Summe der gedoppelten Zufallszahlen: " + summe);
+        return ran;
     }
 
     /**
